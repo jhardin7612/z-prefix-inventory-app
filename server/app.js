@@ -76,12 +76,32 @@ app.delete('/inventory/:item_id', (req, res) => {
 app.post('/inventory', (req, res) => {
     knex('item')
     .insert(req.body)
-    .then(data => res.status(201).send("item has been added to your inventory")
-    .catch(err=> res.status(404).json(err) 
-    ))
+    .then(data => res.status(201).send("item has been added to your inventory"))
+    .catch(err=> res.status(404).json(err))
+})
+
+//Create New Manager
+app.post('/managers', (req, res) => {
+    knex('manager')
+    .insert(req.body)
+    .then(data => res.status(201).send("new manager has been created"))
+    .catch(err=> res.status(404).json(err))
 })
 
 
+//Update Item
+app.patch('/inventory/:item_id', (req, res) => {
+    knex('item')
+    .where("id", req.params.item_id)
+    .update({
+        manager_id: req.body.manager_id,
+        item_name: req.body.item_name,
+        description: req.body.description,
+        quantity: req.body.quantity
+    })
+    .then(data => res.status(200).send("item updated"))
+    .catch(err=> res.status(404).json(err))
+})
 
 
 
