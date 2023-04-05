@@ -6,7 +6,7 @@ exports.up = function(knex) {
         return knex.schema.createTable('item', table => {
             table.increments('id');
             table.integer('manager_id').notNullable();
-            table.foreign('manager_id').references('manager.id').deferrable('deferred');
+            table.foreign('manager_id').references('manager.id');
             table.string('item_name').notNullable();
             table.string('description');
             table.integer('quantity');
