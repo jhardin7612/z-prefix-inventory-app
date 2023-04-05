@@ -73,13 +73,13 @@ app.delete('/inventory/:item_id', (req, res) => {
 })
 
 //Create Item
-// app.post('/inventory', (req, res) => {
-//     knex('item')
-//     .insert(req.body)
-//     .then(data => res.status(201).send("item has been added to your inventory")
-//     .catch(err=> res.status(404).json(err) 
-//     ))
-// })
+app.post('/inventory', (req, res) => {
+    knex('item')
+    .insert(req.body)
+    .then(data => res.status(201).send("item has been added to your inventory")
+    .catch(err=> res.status(404).json(err) 
+    ))
+})
 
 
 
