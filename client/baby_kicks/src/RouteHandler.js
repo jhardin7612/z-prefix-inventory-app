@@ -16,7 +16,7 @@ export const RouteHandler = ({totalInventory}) => {
                 <Route path = '/' element ={<HomePage totalInventory={totalInventory}/>}/>
                 <Route path = '/Login' element ={<Login/>}/>
                 <Route path = '/Register' element ={<Register/>}/>
-                <Route path = '/Inventory/:item_id' element ={<ItemDetails/>}/>
+                <Route path = '/Inventory/:item_id' element ={<ItemDetails totalInventory={totalInventory}/>}/>
                 <Route path = '/Inventory/:user_name' element ={<Inventory/>}/>
             </Routes>
     )
