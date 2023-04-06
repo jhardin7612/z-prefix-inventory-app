@@ -53,10 +53,10 @@ app.get('/managers', (req, res)=>{
 })
 
 //get a specific manager info
-app.get('/managers/:manager_id', (req, res)=>{
+app.get('/managers/:username', (req, res)=>{
     knex('manager')
     .select('*')
-    .where("id", req.params.manager_id)
+    .where("username", req.params.username)
     .then(data => res.status(200).json(data))
     .catch(err =>
         res.status(404).json(err)

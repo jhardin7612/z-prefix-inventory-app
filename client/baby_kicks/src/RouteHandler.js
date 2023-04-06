@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import { HomePage } from './Homepage';
 import { Login } from './Login';
 import { Register } from './Register';
@@ -17,7 +17,8 @@ export const RouteHandler = ({totalInventory}) => {
                 <Route path = '/Login' element ={<Login/>}/>
                 <Route path = '/Register' element ={<Register/>}/>
                 <Route path = '/Inventory/:item_id' element ={<ItemDetails totalInventory={totalInventory}/>}/>
-                <Route path = '/Inventory/:user_name' element ={<Inventory/>}/>
+                <Route path = '/Inventory/manager/:username' element ={<Inventory totalInventory={totalInventory}/>}/>
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
     )
 }

@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 import { Navbar } from './Navbar';
+import { InventoryContext } from './App';
 
 
 export const HomePage = ({totalInventory}) => {
     const navigate = useNavigate();
-    
+    const {username, setUsername, manager_id, manager, setManagerId } = React.useContext(InventoryContext);
 
     return(
         <div>
@@ -19,7 +20,9 @@ export const HomePage = ({totalInventory}) => {
                 <p>Quantity: {item.quantity}</p>
             </div>)
            })}
-           </ul>
+           </ul> 
+           {(!manager) ? null : <button onClick = {()=> navigate(`/Inventory/manager/${username}`)}>My Inventory</button>}
+           
         </div>
     )
 }
