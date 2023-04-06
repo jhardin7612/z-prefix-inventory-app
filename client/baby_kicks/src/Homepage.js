@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router';
+import { Navbar } from './Navbar';
 
 
 export const HomePage = ({totalInventory}) => {
@@ -8,6 +9,7 @@ export const HomePage = ({totalInventory}) => {
 
     return(
         <div>
+            <Navbar/>
            <h1>Hustling Momma!</h1> 
            <ul>
            {totalInventory.map((item,index) => {
