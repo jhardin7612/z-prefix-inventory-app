@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const EditItem = () => {
+export const Register = () => {
 
     return(
         <div>

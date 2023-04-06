@@ -32,7 +32,7 @@ app.get('/inventory/:item_id', (req, res)=> {
     )
 })
 
-// //get all items in specific manager inventory
+//get all items in specific manager inventory
 app.get('/inventory/manager/:manager_id', (req, res) => {
     knex('item')
     .select('*')
@@ -41,7 +41,7 @@ app.get('/inventory/manager/:manager_id', (req, res) => {
     .catch(err=> res.status(404).json(err))
 })
 
-// //get all registered managers & info
+//get all registered managers & info
 app.get('/managers', (req, res)=>{
     knex
     .select('*')
@@ -52,7 +52,7 @@ app.get('/managers', (req, res)=>{
     )
 })
 
-// //get a specific manager info
+//get a specific manager info
 app.get('/managers/:manager_id', (req, res)=>{
     knex('manager')
     .select('*')
