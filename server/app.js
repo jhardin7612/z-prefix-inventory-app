@@ -84,7 +84,7 @@ app.post('/inventory', (req, res) => {
 app.post('/managers', (req, res) => {
     knex('manager')
     .insert(req.body)
-    .then(data => res.status(201).send("new manager has been created"))
+    .then(data => res.status(201))
     .catch(err=> res.status(404).json(err))
 })
 
