@@ -14,7 +14,7 @@ export const Register = () => {
             password: e.target[3].value}
 
             console.log(manObj);
-         
+
 
         fetch('http://localhost:8080/managers', {
             method: "POST",
@@ -26,8 +26,6 @@ export const Register = () => {
      }
 
 
-
-
 return (
     <div>
         <h2>Enter Information Below</h2>
@@ -36,7 +34,7 @@ return (
                 <input className='firstname-input' placeholder='First Name'></input>
                 <input className='lastname-input' placeholder='Last Name'></input>
                 <input className='username-input' placeholder='Username'></input>
-                <input className='password-input' placeholder='Password'></input>
+                <input className='password-input' placeholder='Password' type='password'></input>
             </Container>
             <button type="submit">Register</button>
         </form>

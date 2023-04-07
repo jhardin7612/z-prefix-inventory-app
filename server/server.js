@@ -1,11 +1,14 @@
 const express = require('express');
-const cors =require('cors')
+const knex = require('knex')(require ('./knexfile.js')[process.env.NODE_ENV||'development']);
+const cors =require("cors");
+
 const app = express();
 const port =8080;
-const knex = require('knex')(require ('./knexfile.js')[process.env.NODE_ENV||'development']);
 
 app.use(cors());
 app.use(express.json());
+
+
 
 
 //Root endpoint
@@ -64,16 +67,17 @@ app.get('/managers/:username', (req, res)=>{
 })
 
 //Delete item
-app.delete('/inventory/:item_id', (req, res) => {
+app.delete('/inventory', (req, res) => {
     knex('item')
-    .where("id",req.params.item_id)
+    .where("id",req.body.id)
     .del()
-    .then(data => res.status(200).send("item was deleted"))
+    .then(data => res.status(200))
     .catch(err=> res.status(404).json(err))
 })
 
 //Create Item
 app.post('/inventory', (req, res) => {
+    
     knex('item')
     .insert(req.body)
     .then(data => res.status(201).send("item has been added to your inventory"))

@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router';
 import { InventoryContext } from './App';
 import { Container} from 'react-bootstrap';
 
+
 export const Login = () => {
     const navigate = useNavigate();
+
     
     const { manager, setManager, username, setUsername, manager_id, setManagerId } = React.useContext(InventoryContext);
   
@@ -20,26 +22,20 @@ export const Login = () => {
         })
             .then(res => res.json())
             .then((data) => {
-                setManager(data[0])
-            })
-            .then((data) => {
-                if(manager){
-                    console.log(manager)
-                    setManagerId(manager.manager_id)
-                    setUsername(manager.username)
-                    navigate(`/Inventory/manager/${username}`)
-                }
-                else(alert("try again"))
-
+                setManager(data[0]);
+                setManagerId(manager.id);
+                setUsername(manager.username);
+                navigate(`/Inventory/manager/${username}`)
             })
     }
+
     return (
         <div>
             <h1>Login Page</h1>
             <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }}>
                 <Container className='Register-Container'>
                     <input className='username-input' placeholder='Username'></input>
-                    <input className='password-input' placeholder='Password'></input>
+                    <input className='password-input' placeholder='Password' type='password'></input>
                 </Container>
                 <button type='submit'>Log In</button>
             </form>
