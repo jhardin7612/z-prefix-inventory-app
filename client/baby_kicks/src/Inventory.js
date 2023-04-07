@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { InventoryContext } from './App';
 import EasyEdit from 'react-easy-edit';
+import { Navbar } from './Navbar';
 
 
 export const Inventory = ({ totalInventory }) => {
@@ -58,12 +59,16 @@ export const Inventory = ({ totalInventory }) => {
 
     return (
         <div>
-            <h1>Your Inventory</h1>
+            <Navbar/>
+            <h1>Your Collection</h1>
+
             <button onClick={()=> setShowForm(true)}>Add Item</button>
-            <button onClick={() => navigate(`/`)}>View Main Catalog</button>
+            
+
             {(showForm) ? <form onSubmit={(e)=> {e.preventDefault(); addItem(e); setShowForm(false)}}>
                 <input type='text' placeholder='name'/><input className='add-descr-input' type='text' placeholder='description'/><input type='number' placeholder='quantity'/><button type='submit'>Submit</button>
             </form> : null}
+
             <div className='flex-container'>
                 <ul>
                     {myStuff.map((item, index) => {
@@ -75,8 +80,8 @@ export const Inventory = ({ totalInventory }) => {
                         </div>)
                     })}
                 </ul>
-
             </div>
+            
         </div>
     )
 }

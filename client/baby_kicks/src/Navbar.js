@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { InventoryContext } from './App';
+import './App.css';
 
 export const Navbar = () => {
     const navigate = useNavigate();
@@ -9,16 +10,20 @@ export const Navbar = () => {
 
     return(
         <div className='navbar-container'>
+            <h3 onClick={() => navigate(`/`)}>Baby Kicks</h3>
+        <div>
             {(!manager) ? 
             <div className='navbar-div'>
-            <button onClick={()=> navigate('/Login')}>Login</button>
-            <button onClick={()=> navigate('/Register')}>Register</button>
+            <button className ='navbutton' onClick={()=> navigate('/Login')}>Login</button>
+            <button className ='navbutton' onClick={()=> navigate('/Register')}>Register</button>
             </div>
             :
             <div className='welcom-div'>
-                <p className='welcome-p'>Welcome, {manager.first_name}</p>
+                <p className='welcome-p'>hey there, {manager.username}</p>
             </div>
             }
+        </div>
+
         </div>
     )
 }

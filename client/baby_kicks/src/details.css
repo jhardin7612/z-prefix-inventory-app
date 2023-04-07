@@ -1,0 +1,27 @@
+.ItemDetails-div{
+    display:flex;
+    flex-direction:column;
+    border: 2px solid;
+    border-color: #a8a8a8;
+    width: 80%;
+    height:500px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 10%;
+    
+    
+}
+
+.Full-descr-box{
+   margin:auto;
+    justify-center: center;
+    width: 80%
+}
+.details-div{
+    align-self: center;
+}
+
+.button-div{
+ padding-top: 25%;
+ 
+}

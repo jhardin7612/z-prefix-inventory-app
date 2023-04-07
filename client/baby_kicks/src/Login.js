@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { InventoryContext } from './App';
 import { Container} from 'react-bootstrap';
+import './login.css';
 
 
 export const Login = () => {
@@ -30,7 +31,7 @@ export const Login = () => {
     }
 
     return (
-        <div>
+        <div className='login-div'>
             <h1>Login Page</h1>
             <form onSubmit={(e) => { e.preventDefault(); handleSubmit(e) }}>
                 <Container className='Register-Container'>
