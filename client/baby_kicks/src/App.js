@@ -16,7 +16,7 @@ function App() {
     fetch('http://localhost:8080/inventory')
     .then(res => res.json())
     .then(data => setTotalInventory(data))
-  },[goFetch])
+  },[goFetch, totalInventory])
   
 
   return (

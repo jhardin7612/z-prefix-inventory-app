@@ -5,7 +5,7 @@ import './App.css';
 
 export const Navbar = () => {
     const navigate = useNavigate();
-    const{ manager, username} = React.useContext(InventoryContext);
+    const{ manager, setManager, username} = React.useContext(InventoryContext);
 
 
     return(
@@ -18,8 +18,9 @@ export const Navbar = () => {
             <button className ='navbutton' onClick={()=> navigate('/Register')}>Register</button>
             </div>
             :
-            <div className='welcom-div'>
-                <p className='welcome-p'>hey there, {manager.username}</p>
+            <div className='welcome-div'>
+                <span className='username-span' onClick = {()=> navigate(`/Inventory/manager/${username}`)}><u>{username}</u></span>
+                <button onClick= {()=> {setManager(null); navigate('/') }} > Logout </button>
             </div>
             }
         </div>

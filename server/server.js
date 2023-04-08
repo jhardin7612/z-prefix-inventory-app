@@ -75,16 +75,15 @@ app.delete('/inventory', (req, res) => {
     .catch(err=> res.status(404).json(err))
 })
 
-//Create Item
+//Create Item **only work on postman
 app.post('/inventory', (req, res) => {
-    
     knex('item')
     .insert(req.body)
     .then(data => res.status(201).send("item has been added to your inventory"))
     .catch(err=> res.status(404).json(err))
 })
 
-//Create New Manager
+//Create New Manager ** only work on postman
 app.post('/managers', (req, res) => {
     knex('manager')
     .insert(req.body)
@@ -93,7 +92,7 @@ app.post('/managers', (req, res) => {
 })
 
 
-//Update Item
+//Update Item 
 app.patch('/inventory/:item_id', (req, res) => {
     knex('item')
     .where("id", req.params.item_id)

@@ -14,7 +14,7 @@ export const HomePage = ({totalInventory}) => {
         <div className='home-div'>
             <Navbar/>
            <h1 className='site-title'> Kicking in Style!</h1> 
-           <p>Find your little one a pair today or sell the ones they might have outgrown today!</p>
+           <p>Find your little one a pair today or sell the ones they might have outgrown!</p>
            <div className='home-item-div'>
            {totalInventory.map((item,index) => {
             return(<div className='sep-item-div' key ={index}>
@@ -24,7 +24,7 @@ export const HomePage = ({totalInventory}) => {
             </div>)
            })}
            </div> 
-           {(manager) ? <button onClick = {()=> navigate(`/Inventory/manager/${username}`)}>My Inventory</button> : null}
+           
            
         </div>
     )

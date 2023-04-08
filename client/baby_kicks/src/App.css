@@ -20,3 +20,17 @@
 body {
   background-color: #fff5ee;
  }
+
+ .welcome-div{
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  margin-right: 15px
+ }
+
+ .username-span {
+  margin-left:4px;
+  font-style: underline;
+ }
+
+ 

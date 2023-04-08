@@ -1,43 +1,36 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, { useState, useRef } from 'react';
 import { InventoryContext } from './App';
-import EasyEdit from 'react-easy-edit';
 import { Navbar } from './Navbar';
+import { Table} from 'react-bootstrap';
 
 
 export const Inventory = ({ totalInventory }) => {
-    const { username, managerId, setGoFetch } = React.useContext(InventoryContext);
-    const navigate = useNavigate();
-    const[showForm, setShowForm] = useState(false);
+    const { manager, setGoFetch } = React.useContext(InventoryContext);
+    let myStuff = totalInventory.filter((item) => item.manager_id === manager.id);
+    const itemRef = useRef({ manager_id: manager.id, name: '',  description: '' , quantity: ''}); //use itemref.current.[key]to update each w/ onClick
 
 
-    let myStuff = totalInventory.filter((item) => item.manager_id === managerId);
+    //Create Function
+    const addItem = () => {
 
-
-    //Add Function
-    const addItem = (e) => {
-        let toAdd = {
-            mananger_id: managerId,
-            name: e.target[0].value,
-            description: e.target[1].value,
-            quantity: e.target[2].value
-        }
-        console.log('toAdd obj ', toAdd)
-
-        fetch('http://localhost:8080/Inventory', {
+        fetch('http://localhost:8080/inventory', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(toAdd)
+            body: JSON.stringify(itemRef.current),
         })
             .then(res => res.json())
-            .then(data => {console.log(data)})
+            .then(data => {
+                setGoFetch(true)
+                
+            })
             .catch(err => console.log(err))
     }
 
+    //Update  Function
+
     //Delete Function
     const deleteItem = (item) => {
-
-        fetch(`http://localhost:8080/Inventory`, { //takes a really long time, page doesnt rerender once deleted automatically
+        fetch(`http://localhost:8080/Inventory`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
@@ -45,43 +38,49 @@ export const Inventory = ({ totalInventory }) => {
             .then(res => res.json())
             .then(data => {
                 setGoFetch(true)
-
+                console.log(data)
             })
             .catch(err => console.log(err))
     }
-
-    //Edit Function
-    const editItem = (item) => {
-        console.log('edit function')
-
-    }
-    // onClick={() => navigate(`/inventory/${item.id}`)
-
+   
     return (
         <div>
-            <Navbar/>
-            <h1>Your Collection</h1>
-
-            <button onClick={()=> setShowForm(true)}>Add Item</button>
-            
-
-            {(showForm) ? <form onSubmit={(e)=> {e.preventDefault(); addItem(e); setShowForm(false)}}>
-                <input type='text' placeholder='name'/><input className='add-descr-input' type='text' placeholder='description'/><input type='number' placeholder='quantity'/><button type='submit'>Submit</button>
-            </form> : null}
-
-            <div className='flex-container'>
-                <ul>
-                    {myStuff.map((item, index) => {
-                        return (<div key={index}>
-                            <EasyEdit onSave={() => editItem(item)} value={item.name} type='text' />
-                            <EasyEdit onSave={() => editItem(item)} value={item.description} type='text' />
-                            <div className='flex-container'><span>Quantity: </span><EasyEdit onSave={() => editItem(item)} type='number' value={item.quantity}></EasyEdit></div>
-                            <button onClick={() => { deleteItem(item) }}>Delete</button>
-                        </div>)
-                    })}
-                </ul>
-            </div>
-            
-        </div>
+        <Navbar/>
+        <h2 className='inv-title'>Your Current Stock</h2>
+        <div className='inv-div'>
+           
+        <Table striped bordered hover variant="dark">
+        <thead className='text-center'>
+          <tr>
+            <th>ID</th>
+            <th>Item Name</th>
+            <th className='quantity-header'>Quantity</th>
+            <th>Description</th>
+            <th >Action</th>
+          </tr>
+        </thead>
+        <tbody className='text-center'>
+          <tr key='add'>
+            <td className='text-center'>0</td>
+            <td className=''><input type='text' className='form-control' placeholder='name' onChange={(e)=> itemRef.current.name = e.target.value}/></td>
+            <td><input type='text' className='form-control' placeholder='quantity' onChange={(e)=> itemRef.current.name = e.target.value}/></td>
+            <td><input type='text' className='form-control' placeholder='description' onChange={(e)=> itemRef.current.name = e.target.value}/></td>
+            <td><button type='button' onClick={(e) => addItem(e)}>Add</button></td>
+          </tr>
+          {myStuff.map((item, index) => (
+            <tr key={index} >
+              <td className='text-center' >{item.id}</td>
+              <td>{item.name}</td>
+              <td className='text-center' >{item.quantity}</td>
+              <td className='text-wrap'>{item.description}</td>
+              <td className='d-flex justify-content-evenly'>
+                <button type='button' onClick={()=> {deleteItem(item)}}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      </div>
+      </div>
     )
 }
