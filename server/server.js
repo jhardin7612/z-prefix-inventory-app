@@ -79,7 +79,7 @@ app.delete('/inventory', (req, res) => {
 app.post('/inventory', (req, res) => {
     knex('item')
     .insert(req.body)
-    .then(data => res.status(201).send("item has been added to your inventory"))
+    .then(data => res.status(201))
     .catch(err=> res.status(404).json(err))
 })
 

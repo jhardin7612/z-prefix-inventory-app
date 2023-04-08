@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { InventoryContext } from './App';
 import { Container } from 'react-bootstrap';
-import { Inventory } from './Inventory';
 import './login.css';
 import { Navbar } from './Navbar';
 
@@ -14,7 +13,6 @@ export const Login = () => {
 
     const handleSubmit = (e) => {
         let username = e.target[0].value;
-        let password = e.target[0].value;
 
         fetch(`http://localhost:8080/managers/${username}`, {
             method: "GET",

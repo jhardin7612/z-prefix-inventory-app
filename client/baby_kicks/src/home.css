@@ -1,20 +1,15 @@
 .home-item-div {
     display: flex;
-    align-content: center;
     flex-direction: row;
+    flex-wrap:wrap;
     align-content: center;
-    justify-content: space-evenly
+    justify-content: space-around;
+
+     border-radius: 5px;
+     margin-bottom: 10px;
 }
 
-.home-desc-div {
-    display: flex;
-    align-self: center;
-    width: 400px;
-    text-overflow: ellipsis;
-    border-radius: 5px;
 
-
-}
 
 .home-desc-p {
     display: -webkit-box;

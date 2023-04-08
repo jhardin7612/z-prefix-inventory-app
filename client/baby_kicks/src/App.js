@@ -8,11 +8,11 @@ export const InventoryContext = React.createContext();
 function App() {
   const[totalInventory, setTotalInventory] = useState([]);
   const[ manager, setManager] = useState(null);
-  const[username, setUsername]=useState(null);
-  const[managerId, setManagerId]=useState(null);
-  const[goFetch, setFetch]=useState(false);
+
+  const[goFetch, setGoFetch]=useState(false);
 
   useEffect(() => {
+    setGoFetch(false)
     fetch('http://localhost:8080/inventory')
     .then(res => res.json())
     .then(data => setTotalInventory(data))
@@ -20,7 +20,7 @@ function App() {
   
 
   return (
-    <InventoryContext.Provider value={ {goFetch, manager, setManager, username, setUsername, managerId, setManagerId}}> 
+    <InventoryContext.Provider value={ {goFetch, setGoFetch, manager, setManager}}> 
     <div className="App">
     <RouteHandler totalInventory = {totalInventory}/>
     </div>
