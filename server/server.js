@@ -93,16 +93,11 @@ app.post('/managers', (req, res) => {
 
 
 //Update Item 
-app.patch('/inventory/:item_id', (req, res) => {
+app.put('/inventory', (req, res) => {
     knex('item')
-    .where("id", req.params.item_id)
-    .update({
-        manager_id: req.body.manager_id,
-        item_name: req.body.item_name,
-        description: req.body.description,
-        quantity: req.body.quantity
-    })
-    .then(data => res.status(200).send("item updated"))
+    .where("id", req.body.id)
+    .update(req.body)
+    .then(data => res.status(200))
     .catch(err=> res.status(404).json(err))
 })
 
